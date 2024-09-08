@@ -17,7 +17,7 @@ function App() {
           <Header />
           <div className='flex'>
             <LeftBar expanded={expanded} setExpanded={setExpanded}/>
-            <div className={`${expanded ? "ml-60" : "ml-20"} w-full`}>
+            <div className={`${expanded ? "ml-60" : "ml-20"} w-full overflow-auto`}>
               <Routes>
                 <Route path="/analytics/" element={<Dashboard />} />
                 {navItems.map(item => (

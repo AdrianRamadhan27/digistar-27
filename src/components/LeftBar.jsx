@@ -1,9 +1,8 @@
 import { useContext, createContext, useState } from "react"
-import { CiHome, CiWallet } from "react-icons/ci";
 import { SlRocket } from "react-icons/sl";
 import { GoPeople } from "react-icons/go";
 import { FaChartLine, FaWhatsapp  } from "react-icons/fa6";
-import { LuMailCheck, LuMessageCircle, LuMail, LuArchive } from "react-icons/lu";
+import { LuMailCheck, LuMessageCircle, LuMail, LuArchive, LuHome, LuWallet, LuLineChart  } from "react-icons/lu";
 import { TbTemplate } from "react-icons/tb";
 import { FiPhone } from "react-icons/fi";
 import { Link, useLocation } from "react-router-dom";
@@ -12,7 +11,7 @@ export default function LeftBar({expanded, setExpanded}) {
     return (
         <aside className="h-screen fixed">
             <nav 
-                className={`overflow-hidden h-full flex flex-col border-r-2 border-r-primary justify-start ${
+                className={`overflow-hidden h-full flex flex-col border-r-2 border-r-primary overflow-y-auto ${
                     expanded ? "w-60 bg-white" : "w-20 bg-secondary shadow-lg"
                   }`}
                 onMouseEnter={() => setExpanded(true)}
@@ -20,11 +19,11 @@ export default function LeftBar({expanded, setExpanded}) {
             >   
                  <SidebarContext.Provider value={{ expanded }}>
                     <ul className="flex-5 px-3 border-b-2 border-b-primary">
-                        <LeftBarItem path="/" icon={CiHome} text="Dashboard"/>
-                        <LeftBarItem path="/billing/"  icon={CiWallet} text="Billing"/>
+                        <LeftBarItem path="/" icon={LuHome} text="Dashboard"/>
+                        <LeftBarItem path="/billing/"  icon={LuWallet} text="Billing"/>
                         <LeftBarItem path="/introduction/"  icon={SlRocket} text="Getting Started"/>
                         <LeftBarItem path="/contacts/"  icon={GoPeople} text="Contacts"/>
-                        <LeftBarItem path="/analytics/"  icon={FaChartLine} text="Analytics"/>
+                        <LeftBarItem path="/analytics/"  icon={LuLineChart} text="Analytics"/>
                     </ul>
                     <ul className="flex-2 px-3 border-b-2 border-b-primary">
                         <LeftBarItem path="/validation/"  icon={LuMailCheck} text="Validation"/>
@@ -59,11 +58,11 @@ export function LeftBarItem({ icon, text, path }) {
         className={`p-4
           relative flex items-center 
           font-medium rounded-md cursor-pointer
-          transition-colors group hover:bg-pink-100
+          transition-colors group hover:bg-pink-100 h-11
           ${
             path==location.pathname
-              ? "text-black font-extrabold"
-              : "text-gray-500 font-light"
+              ? "text-black font-bold"
+              : "text-gray-400 font-light"
           }
       `}
       >

@@ -26,12 +26,12 @@ export default function RightBar({expanded, setExpanded}) {
 
                 <div className="flex flex-col p-5 pt-8">
                     {expanded && 
-                        <h2 className="font-bold text-primarytext text-sm">Sub Department</h2>
+                        <h2 className="font-bold text-primarytext text-sm mb-2">Sub Department</h2>
                     }
 
                     {departmentItems.map(item => (
                         expanded
-                        ? <div className="my-2 rounded-sm border-2 border-gray-200 flex gap-2 items-center p-2 justify-between">
+                        ? <div className="my-1 rounded-sm border-2 border-gray-200 flex gap-2 items-center p-2 justify-between">
                                 <div className="flex gap-2 items-center"><GoPerson /><p className="truncate w-36 text-xs">{item}</p></div>
                                 <button className="text-accent hover:text-accent-hover"><LuTrash2 /></button>
                             </div>
@@ -39,7 +39,7 @@ export default function RightBar({expanded, setExpanded}) {
                     ))}
                     
                     {expanded && 
-                        <button className="my-2 flex items-center bg-accent hover:bg-accent-hover text-white text-xs p-2 justify-center gap-1"><GoPersonAdd />Add</button>
+                        <button className="my-2 flex items-center bg-accent hover:bg-accent-hover text-white text-xs p-2 justify-center gap-1 rounded-md"><GoPersonAdd />Add</button>
                     }  
                     
                 </div>

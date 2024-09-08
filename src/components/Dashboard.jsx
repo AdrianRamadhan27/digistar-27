@@ -32,11 +32,11 @@ export default function Dashboard() {
                 <div className="p-5 mt-5 border-b-2 border-b-primary">
                     <div className="bg-gradient-to-r from-white via-pink-400/50 to-accent/50 bg-opacity-50 flex justify-between rounded-md w-full p-5 h-40">
                         <div className="flex flex-col text-left gap-3">
-                            <img src={import.meta.env.BASE_URL+"/images/logo.png"} alt="" className="w-32"/>
+                            <img src={import.meta.env.BASE_URL+"images/logo.png"} alt="" className="w-32"/>
                             <div className="w-fit rounded-full p-1 text-white bg-accent text-xs font-semibold">OCA Interaction</div>
                             <h1 className="text-accent font-extrabold text-3xl truncate">Data Visualization Dashboard</h1>
                         </div>
-                        <img src={import.meta.env.BASE_URL+"/images/cover.png"} alt="" className="overflow-clip"/>
+                        <img src={import.meta.env.BASE_URL+"images/cover.png"} alt="" className="overflow-clip"/>
                     </div>
 
                     <div className="mt-4 flex flex-col gap-4 p-5 text-primarytext">

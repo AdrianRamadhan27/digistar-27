@@ -25,8 +25,8 @@ export default function Dashboard() {
 
     return (
         <div className="flex w-full">
-            <div className={`${expanded ? "mr-64" : "mr-20"} w-full pr-5`}>
-                <div className="text-right px-5">
+            <div className={`${expanded ? "mr-64" : "mr-14"} w-full `}>
+                <div className="text-right mr-5">
                     <button className="text-white bg-accent hover:bg-accent-hover rounded-b-md p-2 text-sm font-semibold">Export to PDF</button>
                 </div>
                 <div className="p-5 mt-5 border-b-2 border-b-primary">
@@ -36,7 +36,7 @@ export default function Dashboard() {
                             <div className="w-fit rounded-full p-1 text-white bg-accent text-xs font-semibold">OCA Interaction</div>
                             <h1 className="text-accent font-extrabold text-3xl truncate">Data Visualization Dashboard</h1>
                         </div>
-                        <img src={import.meta.env.BASE_URL+"/images/cover.png"} alt="" className="hidden md:block"/>
+                        <img src={import.meta.env.BASE_URL+"/images/cover.png"} alt="" className="overflow-clip"/>
                     </div>
 
                     <div className="mt-4 flex flex-col gap-4 p-5 text-primarytext">
@@ -46,20 +46,20 @@ export default function Dashboard() {
                         <h3 className="font-bold text-md">Service Performance Metrics</h3>
                         <div className="grid grid-cols-2 grid-rows-2 max-w-4xl gap-5">
                             <div className="flex gap-2 items-center">
-                                <input type="checkbox" name="" id="" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset" checked={filters.complaint} onClick={() => handleFilterChange('complaint')}/>
-                                <p className="text-sm text-primarytext">Chat complaint handling</p>
+                                <input type="checkbox" name="" id="complaint" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset" checked={filters.complaint} onClick={() => handleFilterChange('complaint')}/>
+                                <label htmlFor="complaint" className="text-sm text-primarytext">Chat complaint handling</label>
                             </div>
                             <div className="flex gap-2 items-center">
-                                <input type="checkbox" name="" id="" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset" checked={filters.status} onClick={() => handleFilterChange('status')}/>
-                                <p className="text-sm text-primarytext">Ticket status monitoring</p>
+                                <input type="checkbox" name="" id="status" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset" checked={filters.status} onClick={() => handleFilterChange('status')}/>
+                                <label htmlFor="status" className="text-sm text-primarytext">Ticket status monitoring</label>
                             </div>
                             <div className="flex gap-2 items-center">
-                                <input type="checkbox" name="" id="" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset" checked={filters.ticket} onClick={() => handleFilterChange('ticket')}/>
-                                <p className="text-sm text-primarytext">Ticket handling</p>
+                                <input type="checkbox" name="" id="ticket" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset" checked={filters.ticket} onClick={() => handleFilterChange('ticket')}/>
+                                <label htmlFor="ticket" className="text-sm text-primarytext">Ticket handling</label>
                             </div>
                             <div className="flex gap-2 items-center">
-                                <input type="checkbox" name="" id="" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset" checked={filters.survey} onClick={() => handleFilterChange('survey')}/>
-                                <p className="text-sm text-primarytext">Survey completion rate</p>
+                                <input type="checkbox" name="" id="survey" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset" checked={filters.survey} onClick={() => handleFilterChange('survey')}/>
+                                <label htmlFor="survey" className="text-sm text-primarytext">Survey completion rate</label>
                             </div>
                         </div>
 

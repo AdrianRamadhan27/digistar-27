@@ -237,12 +237,14 @@ export default function TicketStatus() {
                 </div>
                 <div className="flex flex-col gap-3">
                     <h3 className="font-bold text-md">Sub Department</h3>
+                    <div className="grid grid-cols-2 gap-2">
                     {data.map(item => (
                         <div className="flex gap-2 items-center">
                             <input type="checkbox" name="" id={"subdepartment"+item} className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset"/>
-                            <label htmlFor={"subdepartment"+item}  className="text-sm text-primarytext">{item}</label>
+                            <label htmlFor={"subdepartment"+item}  className="text-xs text-primarytext truncate">{item}</label>
                         </div>
                     ))}
+                    </div>
                 </div>
                 
 

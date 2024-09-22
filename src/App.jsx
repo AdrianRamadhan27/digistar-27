@@ -6,12 +6,13 @@ import LeftBar from './components/LeftBar'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { navItems } from './data/navItems';
 import { useState } from 'react';
-
+import { DepartmentProvider } from './context/DepartmentContext';
 function App() {
   const [expanded, setExpanded] = useState(false);
 
   return (
     <>
+      <DepartmentProvider>
       <Router basename={import.meta.env.BASE_URL}>
         <div className='font-inter'>
           <Header />
@@ -33,6 +34,7 @@ function App() {
        
           
       </Router>
+      </DepartmentProvider>
 
     </>
   )

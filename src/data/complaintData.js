@@ -1,5 +1,4 @@
-export const complaintData = {
-    category: [
+export const complaintData = [
         { category: 'Product Issues', value: 10, date: "2024-01-05" },
         { category: 'Product Issues', value: 15, date: "2024-02-14" },
         { category: 'Product Issues', value: 25, date: "2024-03-03" },
@@ -54,5 +53,4 @@ export const complaintData = {
         { category: 'Billing Issues', value: 9, date: "2024-08-08" },
         { category: 'Billing Issues', value: 20, date: "2024-09-18" },
         { category: 'Billing Issues', value: 22, date: "2024-10-28" },
-    ]
-};
+    ];

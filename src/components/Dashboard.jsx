@@ -10,8 +10,8 @@ export default function Dashboard() {
 
     const [filters, setFilters] = useState({
         complaint: true,
-        ticket: false,
-        status: false,
+        ticket: true,
+        status: true,
         survey: false,
       });
     

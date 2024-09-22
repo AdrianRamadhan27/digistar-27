@@ -1,10 +1,10 @@
-import { departmentItems } from "../../data/departmentsItems";
 import { useState } from "react";
 import { FaArrowDown } from "react-icons/fa";
 import { PieChart, Pie, Tooltip, Cell, ResponsiveContainer, BarChart, Bar,  Legend,  LineChart, Line, XAxis, YAxis, CartesianGrid  } from 'recharts';
 import  { formatDateToReadable } from "../../utils/dateFormat";
 import { complaintData } from "../../data/complaintData";
-
+import React, { useContext } from 'react';
+import { DepartmentContext } from "../../context/DepartmentContext";
 
 const categoryColors = {
     'Product Issues': "#2F80ED",
@@ -14,6 +14,7 @@ const categoryColors = {
     'Billing Issues': "#6B778C",
 };
 export default function ComplaintHandling() {
+    const { data, addToList, deleteFromList } = useContext(DepartmentContext);
 
     const [isEditing, setIsEditing] = useState(false);
     const [description, setDescription] = useState("The chart presents five key metrics for handling product complaints. Complaint Resolution Time and First Response Time both hold the largest shares at 30%, indicating a focus on quick responses and resolutions. Customer Satisfaction follows at 25%, showing an emphasis on customer contentment. Chat Volume per Agent accounts for 10%, and Escalation Rate is the lowest at 5%, indicating minimal need for escalations. The data highlights a balance between efficient handling and customer satisfaction.");
@@ -51,6 +52,47 @@ export default function ComplaintHandling() {
         bar: false, 
     });
 
+    // Handle changes in the checkbox states
+    const handleTypeChange = (typeName) => {
+        setChartType({
+            pie: typeName === 'pie',
+            line: typeName === 'line',
+            bar: typeName === 'bar',
+        });
+    };
+
+    const [interval, setInterval] = useState({
+        daily: true,
+        weekly: false, 
+        monthly: false, 
+    });
+
+    // Handle changes in the checkbox states
+    const handleIntervalChange = (typeName) => {
+        setInterval({
+            daily: typeName === 'daily',
+            weekly: typeName === 'weekly',
+            monthly: typeName === 'monthly',
+        });
+    };
+
+    const [metricUsed, setMetricUsed] = useState({
+        category: true,
+        resolution: false, 
+        escalation: false, 
+        abandonment: false, 
+    });
+
+    // Handle changes in the checkbox states
+    const handleMetricChange = (typeName) => {
+        setMetricUsed({
+            category: typeName === 'category',
+            resolution: typeName === 'resolution',
+            escalation: typeName === 'escalation',
+            abandonment: typeName === 'abandonment',
+        });
+    };
+
     const groupComplaintDataByCategory = (data) => {
 
         // Create an empty object to store the grouped data
@@ -73,20 +115,31 @@ export default function ComplaintHandling() {
         return Object.values(groupedData);
     };
 
-    const groupByMonth = (data) => {
+    const groupByPeriod = (data) => {
         const groupedData = {};
         const categories = ['Product Issues', 'Service Quality', 'Other Complaint', 'Technical Support', 'Billing Issues'];
     
         data.forEach(({ category, value, date }) => {
-            const monthYear = new Date(date).toLocaleString('default', { month: 'long', year: 'numeric' });
-            if (!groupedData[monthYear]) {
-                groupedData[monthYear] = { name: monthYear };
+            const dateObj = new Date(date);
+            let period;
+    
+            if (interval.monthly) {
+                period = dateObj.toLocaleString('default', { month: 'long', year: 'numeric' });
+            } else if (interval.weekly) {
+                const weekNumber = Math.ceil((dateObj.getDate() + (dateObj.getDay() || 7)) / 7); // Calculate week number in the month
+                const month = dateObj.toLocaleString('default', { month: 'short' });
+                period = `W${weekNumber} ${month} ${dateObj.getFullYear().toString().slice(-2)}`;
+            } else { // Default to daily grouping
+                period = dateObj.toLocaleString('default', { day: '2-digit', month: 'short', year: '2-digit' });
+            }
+            if (!groupedData[period]) {
+                groupedData[period] = { name: period };
                 // Initialize all categories to 0
                 categories.forEach(cat => {
-                    groupedData[monthYear][cat] = 0;
+                    groupedData[period][cat] = 0;
                 });
             }
-            groupedData[monthYear][category] += value; // Accumulate the value
+            groupedData[period][category] += value; // Accumulate the value
         });
     
         // Ensure all months have all categories initialized
@@ -101,17 +154,10 @@ export default function ComplaintHandling() {
         return Object.values(groupedData);
     }
     
-      // Handle changes in the checkbox states
-    const handleTypeChange = (typeName) => {
-        setChartType({
-            pie: typeName === 'pie',
-            line: typeName === 'line',
-            bar: typeName === 'bar',
-        });
-      };
+
 
     const convertPieData = () => {
-        const filteredData = complaintData["category"].filter((item) => {
+        const filteredData = complaintData.filter((item) => {
             const itemDate = new Date(item.date);
             return itemDate >= new Date(startDate) && itemDate <= new Date(endDate);
         });
@@ -122,17 +168,17 @@ export default function ComplaintHandling() {
       // Filter complaint data based on the selected date range
     const pieData = convertPieData()
 
-    const convertLineData = () => {
-        const filteredData = complaintData["category"].filter((item) => {
+    const convertPeriodicData = () => {
+        const filteredData = complaintData.filter((item) => {
             const itemDate = new Date(item.date);
             return itemDate >= new Date(startDate) && itemDate <= new Date(endDate);
         });
         
-        return groupByMonth(filteredData);
+        return groupByPeriod(filteredData);
     }
 
       // Filter complaint data based on the selected date range
-    const lineData = convertLineData()
+    const periodicData = convertPeriodicData()
 
 
 
@@ -140,7 +186,7 @@ export default function ComplaintHandling() {
         <div className="p-10 mt-5 border-b-2 border-b-primary">
             <h2 className="font-bold text-xl">Chat Complaint Handling</h2>
 
-            <div className="grid grid-cols-4 max-w-5xl mt-4">
+            <div className={`grid ${chartType.pie ? "grid-cols-4": "grid-cols-5"} max-w-5xl mt-4`}>
                 <div className="flex flex-col gap-3">
                     <h3 className="font-bold text-md">Chart</h3>
                     <div className="flex gap-2 items-center">
@@ -156,6 +202,22 @@ export default function ComplaintHandling() {
                         <label htmlFor="bar" className="text-sm text-primarytext">Bar chart</label>
                     </div>
                 </div>
+                {!chartType.pie && <div className="flex flex-col gap-3">
+                    <h3 className="font-bold text-md">Interval</h3>
+                    <div className="flex gap-2 items-center">
+                        <input type="checkbox" name="" id="pie" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset" checked={interval.daily} onClick={() => handleIntervalChange('daily')}/>
+                        <label htmlFor="pie" className="text-sm text-primarytext">Daily</label>
+                    </div>
+                    <div className="flex gap-2 items-center">
+                        <input type="checkbox" name="" id="line" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset" checked={interval.weekly} onClick={() => handleIntervalChange('weekly')}/>
+                        <label htmlFor="line" className="text-sm text-primarytext">Weekly</label>
+                    </div>
+                    <div className="flex gap-2 items-center">
+                        <input type="checkbox" name="" id="bar" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset" checked={interval.monthly} onClick={() => handleIntervalChange('monthly')}/>
+                        <label htmlFor="bar" className="text-sm text-primarytext">Monthly</label>
+                    </div>
+                </div>}
+                
                 <div className="flex flex-col gap-3">
                     <h3 className="font-bold text-md">Date</h3>
                     <div className="flex max-w-44 justify-between items-center">
@@ -171,13 +233,13 @@ export default function ComplaintHandling() {
                 <div className="flex flex-col gap-3">
                     <h3 className="font-bold text-md">Department</h3>
                     <div className="flex gap-2 items-center">
-                        <input type="checkbox" name="" id="department" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset"/>
+                        <input type="checkbox" name="" id="department" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset" checked/>
                         <label htmlFor="department" className="text-sm text-primarytext">Kanwil DKI Jakarta</label>
                     </div>
                 </div>
                 <div className="flex flex-col gap-3">
                     <h3 className="font-bold text-md">Sub Department</h3>
-                    {departmentItems.map(item => (
+                    {data.map(item => (
                         <div className="flex gap-2 items-center">
                             <input type="checkbox" name="" id={"subdepartment"+item} className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset"/>
                             <label htmlFor={"subdepartment"+item}  className="text-sm text-primarytext">{item}</label>
@@ -191,19 +253,19 @@ export default function ComplaintHandling() {
                 <h3 className="font-bold text-md">Metrics</h3>
                 <div className="grid grid-cols-2 grid-rows-2 gap-5">
                     <div className="flex gap-2 items-center">
-                        <input type="checkbox" name="" id="category" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset"/>
+                        <input type="checkbox" name="" id="category" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset" checked={metricUsed.category} onClick={() => handleMetricChange('category')}/>
                         <label htmlFor="category" className="text-sm text-primarytext">Complaint category</label>
                     </div>
                     <div className="flex gap-2 items-center">
-                        <input type="checkbox" name="" id="escalation" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset"/>
+                        <input type="checkbox" name="" id="escalation" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset" checked={metricUsed.escalation} onClick={() => handleMetricChange('escalation')}/>
                         <label htmlFor="escalation" className="text-sm text-primarytext">Escalation rate</label>
                     </div>
                     <div className="flex gap-2 items-center">
-                        <input type="checkbox" name="" id="firstcontact" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset"/>
+                        <input type="checkbox" name="" id="firstcontact" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset" checked={metricUsed.resolution} onClick={() => handleMetricChange('resolution')}/>
                         <label htmlFor="firstcontact" className="text-sm text-primarytext">First contact resolution</label>
                     </div>
                     <div className="flex gap-2 items-center">
-                        <input type="checkbox" name="" id="abandonment" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset"/>
+                        <input type="checkbox" name="" id="abandonment" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset" checked={metricUsed.abandonment} onClick={() => handleMetricChange('abandonment')}/>
                         <label htmlFor="abandonment" className="text-sm text-primarytext">Chat abandonment rate</label>
                     </div>
                 </div>
@@ -246,7 +308,7 @@ export default function ComplaintHandling() {
                                         <LineChart
                                         width="100%"
                                         height={400}
-                                        data={lineData}
+                                        data={periodicData}
                                       >
                                         <CartesianGrid strokeDasharray="3 3" />
                                         <XAxis dataKey="name" />
@@ -262,15 +324,18 @@ export default function ComplaintHandling() {
                                 } else if (chartType.bar) {
                                     // Replace with your BarChart component
                                     return (
-                                        <BarChart width="100%" height={400} data={pieData}>
+                                        <BarChart width="100%" height={400} data={periodicData}>
                                             <CartesianGrid strokeDasharray="3 3" />
                                             <XAxis dataKey="name" />
                                             <YAxis />
-                                            <Bar dataKey="value" fill="#8884d8" label={{ position: 'top' }}>
-                                                {pieData.map((entry, index) => (
-                                                    <Cell key={`cell-${index}`} fill={entry.color} />
-                                                ))}
-                                            </Bar>
+                                            <Tooltip />
+                                            <Legend />
+                                            {Object.entries(categoryColors).map(([category, color]) => (
+                                                 <Bar dataKey={category} stackId="a" fill={color} />
+                                            ))}
+
+                                
+
                                         </BarChart>
                                     );
                                 }

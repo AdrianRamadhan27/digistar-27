@@ -251,7 +251,7 @@ export default function ComplaintHandling() {
                 
 
             </div>
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3  my-5">
                 <h3 className="font-bold text-md">Metrics</h3>
                 <div className="grid grid-cols-2 grid-rows-2 gap-5">
                     <div className="flex gap-2 items-center">

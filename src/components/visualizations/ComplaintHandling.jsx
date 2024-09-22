@@ -154,13 +154,12 @@ export default function ComplaintHandling() {
         return Object.values(groupedData);
     }
     
-
+    const filteredData = complaintData.filter((item) => {
+        const itemDate = new Date(item.date);
+        return itemDate >= new Date(startDate) && itemDate <= new Date(endDate);
+    });
 
     const convertPieData = () => {
-        const filteredData = complaintData.filter((item) => {
-            const itemDate = new Date(item.date);
-            return itemDate >= new Date(startDate) && itemDate <= new Date(endDate);
-        });
         
         return groupComplaintDataByCategory(filteredData);
     }
@@ -169,10 +168,6 @@ export default function ComplaintHandling() {
     const pieData = convertPieData()
 
     const convertPeriodicData = () => {
-        const filteredData = complaintData.filter((item) => {
-            const itemDate = new Date(item.date);
-            return itemDate >= new Date(startDate) && itemDate <= new Date(endDate);
-        });
         
         return groupByPeriod(filteredData);
     }
@@ -280,7 +275,7 @@ export default function ComplaintHandling() {
                 <h2 className="font-extrabold text-xl">Chat Complaint Handling Chart</h2>
                 <p className="text-xs">{formatDateToReadable(startDate)} - {formatDateToReadable(endDate)}</p>
                 <ResponsiveContainer width="100%" height={400}>
-                    { pieData.length === 0 ? (
+                    { filteredData.length === 0 ? (
                             <h2 className="text-accent font-bold text-xl my-10">There are no data within the date range</h2>
                         )
                         : (

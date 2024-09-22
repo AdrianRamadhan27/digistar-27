@@ -12,7 +12,7 @@ export default function Dashboard() {
         complaint: true,
         ticket: true,
         status: true,
-        survey: false,
+        survey: true,
       });
     
       // Handle changes in the checkbox states

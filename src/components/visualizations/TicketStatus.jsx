@@ -253,45 +253,45 @@ export default function TicketStatus() {
                     <div className="flex flex-col gap-3">
                         <h3 className="font-bold text-sm">Tickets Handling Efficiency</h3>
                         <div className="flex gap-2 items-center">
-                            <input type="checkbox" name="" id="pie" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset" checked={chartType.pie} onClick={() => handleTypeChange('pie')}/>
+                            <input type="checkbox" name="" id="pie" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset"/>
                             <label htmlFor="pie" className="text-sm text-primarytext">Tickets Received</label>
                         </div>
                         <div className="flex gap-2 items-center">
-                            <input type="checkbox" name="" id="line" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset" checked={chartType.line} onClick={() => handleTypeChange('line')}/>
+                            <input type="checkbox" name="" id="line" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset"/>
                             <label htmlFor="line" className="text-sm text-primarytext">Tickets Pending</label>
                         </div>
                         <div className="flex gap-2 items-center">
-                            <input type="checkbox" name="" id="bar" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset" checked={chartType.bar} onClick={() => handleTypeChange('bar')}/>
+                            <input type="checkbox" name="" id="bar" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset"/>
                             <label htmlFor="bar" className="text-sm text-primarytext">Tickets Closed</label>
                         </div>
                     </div>
                     <div className="flex flex-col gap-3 border-l-2 border-l-gray-200 pl-2">
                         <h3 className="font-bold text-sm">Source</h3>
                         <div className="flex gap-2 items-center">
-                            <input type="checkbox" name="" id="pie" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset" checked={chartType.pie} onClick={() => handleTypeChange('pie')}/>
+                            <input type="checkbox" name="" id="pie" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset"/>
                             <label htmlFor="pie" className="text-sm text-primarytext">SMS</label>
                         </div>
                         <div className="flex gap-2 items-center">
-                            <input type="checkbox" name="" id="line" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset" checked={chartType.line} onClick={() => handleTypeChange('line')}/>
+                            <input type="checkbox" name="" id="line" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset"/>
                             <label htmlFor="line" className="text-sm text-primarytext">Email</label>
                         </div>
                         <div className="flex gap-2 items-center">
-                            <input type="checkbox" name="" id="bar" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset" checked={chartType.bar} onClick={() => handleTypeChange('bar')}/>
+                            <input type="checkbox" name="" id="bar" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset"/>
                             <label htmlFor="bar" className="text-sm text-primarytext">Whatsapp</label>
                         </div>
                     </div>
                     <div className="flex flex-col gap-3 border-l-2 border-l-gray-200 pl-2">
                         <h3 className="font-bold text-sm">Tickets Priority Level</h3>
                         <div className="flex gap-2 items-center">
-                            <input type="checkbox" name="" id="pie" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset" checked={chartType.pie} onClick={() => handleTypeChange('pie')}/>
+                            <input type="checkbox" name="" id="pie" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset"/>
                             <label htmlFor="pie" className="text-sm text-primarytext">High</label>
                         </div>
                         <div className="flex gap-2 items-center">
-                            <input type="checkbox" name="" id="line" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset" checked={chartType.line} onClick={() => handleTypeChange('line')}/>
+                            <input type="checkbox" name="" id="line" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset"/>
                             <label htmlFor="line" className="text-sm text-primarytext">Medium</label>
                         </div>
                         <div className="flex gap-2 items-center">
-                            <input type="checkbox" name="" id="bar" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset" checked={chartType.bar} onClick={() => handleTypeChange('bar')}/>
+                            <input type="checkbox" name="" id="bar" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset"/>
                             <label htmlFor="bar" className="text-sm text-primarytext">Low</label>
                         </div>
                     </div>
@@ -301,33 +301,33 @@ export default function TicketStatus() {
                     <div className="flex flex-col gap-3">
                         <h3 className="font-bold text-sm">First Contact Resolution vs. Satisfaction</h3>
                         <div className="flex gap-2 items-center">
-                            <input type="checkbox" name="" id="pie" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset" checked={chartType.pie} onClick={() => handleTypeChange('pie')}/>
+                            <input type="checkbox" name="" id="pie" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset"/>
                             <label htmlFor="pie" className="text-sm text-primarytext">First Contact Resolution</label>
                         </div>
                         <div className="flex gap-2 items-center">
-                            <input type="checkbox" name="" id="line" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset" checked={chartType.line} onClick={() => handleTypeChange('line')}/>
+                            <input type="checkbox" name="" id="line" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset"/>
                             <label htmlFor="line" className="text-sm text-primarytext">Customer Satisfaction</label>
                         </div>
                     </div>
                     <div className="flex flex-col gap-3 border-l-2 border-l-gray-200 pl-2">
                         <h3 className="font-bold text-sm">Tickets Handled vs. Response Time</h3>
                         <div className="flex gap-2 items-center">
-                            <input type="checkbox" name="" id="pie" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset" checked={chartType.pie} onClick={() => handleTypeChange('pie')}/>
+                            <input type="checkbox" name="" id="pie" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset"/>
                             <label htmlFor="pie" className="text-sm text-primarytext">Tickets Handled</label>
                         </div>
                         <div className="flex gap-2 items-center">
-                            <input type="checkbox" name="" id="line" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset" checked={chartType.line} onClick={() => handleTypeChange('line')}/>
+                            <input type="checkbox" name="" id="line" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset"/>
                             <label htmlFor="line" className="text-sm text-primarytext">Agent Response Time</label>
                         </div>
                     </div>
                     <div className="flex flex-col gap-3 border-l-2 border-l-gray-200 pl-2">
                         <h3 className="font-bold text-sm">Response vs. Resolution Time</h3>
                         <div className="flex gap-2 items-center">
-                            <input type="checkbox" name="" id="pie" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset" checked={chartType.pie} onClick={() => handleTypeChange('pie')}/>
+                            <input type="checkbox" name="" id="pie" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset"/>
                             <label htmlFor="pie" className="text-sm text-primarytext">Response Time</label>
                         </div>
                         <div className="flex gap-2 items-center">
-                            <input type="checkbox" name="" id="line" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset" checked={chartType.line} onClick={() => handleTypeChange('line')}/>
+                            <input type="checkbox" name="" id="line" className="accent-accent ring-2 ring-accent w-fit h-fit ring-inset"/>
                             <label htmlFor="line" className="text-sm text-primarytext">Resolution Time</label>
                         </div>
                     </div>

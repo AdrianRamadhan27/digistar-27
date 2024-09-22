@@ -1,7 +1,7 @@
 import { departmentItems } from "../../data/departmentsItems";
 import { useState } from "react";
 import { FaArrowDown } from "react-icons/fa";
-import { PieChart, Pie, Tooltip, Cell, ResponsiveContainer,  Legend,  LineChart, Line, XAxis, YAxis, CartesianGrid  } from 'recharts';
+import { PieChart, Pie, Tooltip, Cell, ResponsiveContainer, BarChart, Bar,  Legend,  LineChart, Line, XAxis, YAxis, CartesianGrid  } from 'recharts';
 import  { formatDateToReadable } from "../../utils/dateFormat";
 import { complaintData } from "../../data/complaintData";
 
@@ -262,7 +262,16 @@ export default function ComplaintHandling() {
                                 } else if (chartType.bar) {
                                     // Replace with your BarChart component
                                     return (
-                                        <div></div>
+                                        <BarChart width="100%" height={400} data={pieData}>
+                                            <CartesianGrid strokeDasharray="3 3" />
+                                            <XAxis dataKey="name" />
+                                            <YAxis />
+                                            <Bar dataKey="value" fill="#8884d8" label={{ position: 'top' }}>
+                                                {pieData.map((entry, index) => (
+                                                    <Cell key={`cell-${index}`} fill={entry.color} />
+                                                ))}
+                                            </Bar>
+                                        </BarChart>
                                     );
                                 }
                                 return null; // Fallback if none are selected
